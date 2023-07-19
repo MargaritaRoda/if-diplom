@@ -1,0 +1,11 @@
+.root {
+  display: flex;
+  border-radius: 8px;
+  height: fit-content;
+}
+.loadingMessage {
+  display: flex;
+  text-align: center;
+  color: var(--secondary-gray);
+  font-size: 24px;
+}

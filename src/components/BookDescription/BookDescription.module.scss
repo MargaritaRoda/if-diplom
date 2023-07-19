@@ -1,0 +1,84 @@
+.bookDescription {
+  display: grid;
+  grid-template-columns: 350px 800px;
+  grid-template-rows: repeat(8, auto [row-end]);
+  margin: 1%;
+}
+
+.bookDescriptionImg {
+  grid-row-start: 1;
+  grid-row-end: 8;
+  grid-column: 1;
+  width: 300px;
+}
+
+.bookDescriptionRatio {
+  grid-column: 2;
+  margin-bottom: 2%;
+}
+
+.bookDescriptionTitle {
+  grid-column: 2;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.bookDescriptionAuthor {
+  grid-column: 2;
+  font-size: 24px;
+  color: var(--general-red);
+  margin-bottom: 2%;
+}
+
+.bookDescriptionRelease {
+  grid-column: 2;
+  font-size: 18px;
+  color: var(--gray);
+  margin-bottom: 1%;
+}
+
+.bookDescriptionBtn {
+  grid-column: 2;
+  width: 23%;
+  height: 65%;
+  color: var(--white);
+  background-color: var(--general-red);
+  border: 1px solid var(--general-red);
+  margin-bottom: 5%;
+  font-size: 20px;
+}
+
+.bookDescriptionSubTitle {
+  grid-column: 2;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 2%;
+}
+
+.bookDescriptionDescr {
+  grid-column: 2;
+  font-size: 12px;
+  margin-bottom: 2%;
+  margin-right: 5%;
+  &.bookDescriptionDescrShort {
+    height: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+.bookDescriptionBtnShow {
+  grid-column: 2;
+  width: 122px;
+  height: 32px;
+  border: 1px solid var(--secondary-gray);
+  background-color: var(--secondary-gray);
+  color: var(--white);
+  font-size: 12px;
+}
+
+.ratioStar {
+  width: 15px;
+  aspect-ratio: 15/14;
+  margin-right: 2%;
+}

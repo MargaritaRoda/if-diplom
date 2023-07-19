@@ -1,0 +1,13 @@
+.mainUserPage {
+  background-color: var(--background-gray);
+
+  padding: 1% 0;
+}
+
+.bookList {
+  flex-direction: column;
+  gap: 16px;
+  margin: 5% 0;
+  border: 1px solid var(--white);
+  background-color: var(--white);
+}

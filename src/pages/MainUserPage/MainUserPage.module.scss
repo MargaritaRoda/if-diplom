@@ -1,0 +1,70 @@
+.mainUserPage {
+  background-color: var(--background-gray);
+  padding: 1% 0;
+}
+
+.container {
+  max-width: 1232px;
+  margin: 0 auto;
+}
+
+.bookList {
+  flex-direction: column;
+  gap: 16px;
+  margin: 5% 0;
+  border: 1px solid var(--white);
+  background-color: var(--white);
+}
+
+.bookListItemWrapper {
+  display: flex;
+  margin: 3%;
+  gap: 8px;
+}
+
+.bookListTitle {
+  margin: 3%;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.bookListItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  max-width: 122px;
+  color: var(--black);
+}
+
+.itemTitle {
+  font-size: 12px;
+}
+
+.itemRatio {
+}
+
+.itemButton {
+  width: 100%;
+  height: 32px;
+  border: 1px solid var(--secondary-gray);
+  //border-radius: 8px;
+  background-color: var(--secondary-gray);
+  color: var(--white);
+}
+
+//.mainUserPageDropDown {
+//  width: 16px;
+//  aspect-ratio: 8/5;
+//}
+//
+//.mainUserPageAccount {
+//  width: 36px;
+//  aspect-ratio: 1/1;
+//  fill: var(--gray);
+//}
+
+//.mainUserPageInput {
+//  border: solid 2px var(--secondary-gray);
+//  background-color: var(--background-gray);
+//}

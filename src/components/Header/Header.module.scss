@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 60px;
+}
+
+.headerLogo {
+  max-height: 35px;
+}
+
+.headerInputWrap {
+  flex-basis: 50%;
+}
+
+.headerInput {
+  border: solid 2px var(--general-red);
+
+  &.active {
+    border: solid 2px var(--secondary-gray);
+  }
+}
+
+.headerDropDown {
+  width: 16px;
+  aspect-ratio: 8/5;
+}
+
+.headerAccount {
+  width: 36px;
+  aspect-ratio: 1/1;
+  fill: var(--gray);
+}

@@ -1,0 +1,72 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  justify-content: center;
+  color: var(--black);
+  background-color: var(--white);
+  border: 1px solid var(--secondary-gray);
+  border-radius: 8px;
+  padding: 3%;
+  margin: 0 auto 3%;
+}
+
+.rootCloseWrap {
+  display: flex;
+  align-self: center;
+  margin: 5%;
+}
+
+.rootRegistrLogo {
+  width: 81px;
+  aspect-ratio: 1/1;
+  fill: var(--gray);
+}
+
+.rootTitle {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 5%;
+}
+
+.rootForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.rootLabel {
+  color: var(--gray);
+  font-size: 16px;
+  margin-bottom: 1%;
+}
+
+.rootInput {
+  border: 1px solid var(--secondary-gray);
+  color: var(--black);
+  margin-bottom: 5%;
+
+  &::placeholder {
+    color: var(--black);
+  }
+}
+
+.rootBtn {
+  align-self: center;
+  color: var(--white);
+  font-size: 18px;
+  background-color: var(--general-red);
+  border: 1px solid var(--general-red);
+  width: 30%;
+  height: 32px;
+}
+
+.rootBtnChangePhoto {
+  align-self: center;
+  color: var(--white);
+  font-size: 16px;
+  background-color: var(--secondary-gray);
+  border: 1px solid var(--secondary-gray);
+  width: 45%;
+  height: 32px;
+}
