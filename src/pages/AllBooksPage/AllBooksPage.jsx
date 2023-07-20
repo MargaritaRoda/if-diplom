@@ -6,10 +6,13 @@ import { Container } from '../../components/Container';
 import { Footer } from '../../components/Footer';
 import { useGetAllBooksQuery } from '../../store/slicers/apiSlice';
 import { AllBooksList } from '../../components/AllBooksList';
+import { useDispatch } from 'react-redux';
 
 export const AllBooksPage = () => {
   const [quantityBook, setQuantityBook] = useState(4);
   console.log('allBooksPage render');
+
+  const dispatch = useDispatch();
 
   const { data: books, isLoading } = useGetAllBooksQuery();
   console.log('data', books);
@@ -17,7 +20,7 @@ export const AllBooksPage = () => {
   const handleShowMoreBooks = (event) => {
     setQuantityBook((prevState) => prevState + 4);
   };
-  console.log('quantityBook', quantityBook);
+
   return (
     <>
       <Container>

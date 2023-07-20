@@ -24,7 +24,9 @@
   border: 1px solid var(--general-blue);
   font-size: 12px;
   border-radius: 10px;
-  //margin-bottom: 35%;
+  &_taken {
+    border: 1px solid var(--general-red);
+  }
 }
 
 .AllBooksItemTitle {

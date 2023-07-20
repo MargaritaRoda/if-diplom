@@ -17,7 +17,7 @@
 .headerInput {
   border: solid 2px var(--general-red);
 
-  &.active {
+  &_active {
     border: solid 2px var(--secondary-gray);
   }
 }

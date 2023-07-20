@@ -5,11 +5,13 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { apiSlice } from './slicers/apiSlice';
 import allOrders from './slicers/allOrders.slicer';
+import allUsers from './slicers/allUsers.slicer';
 
 const rootReducer = combineReducers({
   [user.name]: user.reducer,
   [allOrders.name]: allOrders.reducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
+  [allUsers.name]: allUsers.reducer,
 });
 
 const persistConfig = {

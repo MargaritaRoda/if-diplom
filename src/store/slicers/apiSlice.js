@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_BOOKS } from '../../services/config/index';
-import { randomRatio } from '../../lib/makeRatio';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
+  keepUnusedDataFor: Infinity,
   baseQuery: fetchBaseQuery({
     baseUrl: API_BOOKS,
   }),

@@ -5,7 +5,7 @@ import { Icon } from '../Icon';
 export const UserForm = ({ text, children }) => {
   return (
     <>
-      <div className={styles.wrapperLoginPage}></div>
+      <div className={styles.wrapperRegistrationPage}></div>
       <div className={styles.root}>
         <div className={styles.rootCloseWrap}>
           <Icon name="close" className={styles.rootClose} />

@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Header.module.scss';
 import { Icon } from '../Icon';
 import { Input } from '../Input';
 import { HeaderNav } from '../HeaderNav';
 import { HeaderNavLink } from '../HeaderNavLink';
 import { useSelector } from 'react-redux';
-import { selectIsUserAuthorized } from '../../store/selectors/user.selector';
 import classNames from 'classnames';
+import { DropDown } from '../../pages/DropDown';
+import { createPortal } from 'react-dom';
+import { isUserAuthorized } from '../../store/selectors/user.selector';
 
 export const Header = ({ onClick, onClick2, isActive = false }) => {
-  const isUserAuth = useSelector(selectIsUserAuthorized);
+  const [isVisible, setIsVisible] = useState(false);
+  const isUserAuth = useSelector(isUserAuthorized);
   console.log('authorize', isUserAuth);
+
+  const handleOpenDropDown = (event) => {
+    setIsVisible(!isVisible);
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.headerLogo}>
@@ -19,7 +27,10 @@ export const Header = ({ onClick, onClick2, isActive = false }) => {
       <div className={styles.headerInputWrap}>
         {isUserAuth ? (
           <Input
-            className={classNames(styles.headerInput, styles.active)}
+            className={classNames(
+              styles.headerInput,
+              styles.headerInput_active,
+            )}
             placeholder="  &#128269; Search by author, title, name"
           />
         ) : (
@@ -34,16 +45,25 @@ export const Header = ({ onClick, onClick2, isActive = false }) => {
           <>
             <HeaderNavLink text="All books" isActive path={'/allBooksPage'} />
             <HeaderNavLink text="Your orders" isActive path={'/MainUserPage'} />
-            <Icon name="account" className={styles.headerAccount} />
-            <Icon name="dropDown" className={styles.headerDropDown} />
+            <Icon
+              name="account"
+              className={styles.headerAccount}
+              onClick={handleOpenDropDown}
+            />
+            <Icon
+              name="dropDown"
+              className={styles.headerDropDown}
+              onClick={handleOpenDropDown}
+            />
           </>
         ) : (
           <>
             <HeaderNavLink text="Log In" onClick={onClick} path={'/login'} />
-            <HeaderNavLink text="Sign In" onClick={onClick} path={'/signin'} />
+            <HeaderNavLink text="Sign Up" onClick={onClick} path={'/signup'} />
           </>
         )}
       </HeaderNav>
+      {createPortal(<DropDown visible={isVisible} />, document.body)}
     </header>
   );
 };

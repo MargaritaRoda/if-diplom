@@ -12,8 +12,9 @@ const user = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     login: (
+      // записываем текущего пользлвателя (текущая сессия)
       state,
-      { payload: { username = '', birthdate = '', email = '', password = '' } },
+      { payload: { username, birthdate, email, password } },
     ) => ({
       username,
       birthdate,

@@ -6,8 +6,28 @@ import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { Container } from '../../components/Container';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  passwordSelector,
+  selectAllInformation,
+} from '../../store/selectors/user.selector';
+import { Form } from 'react-router-dom';
+import { login } from '../../store/slicers/user.slicer';
+import { setNewUser } from '../../store/slicers/allUsers.slicer';
 
 export const SettingsPage = () => {
+  const dispatch = useDispatch();
+  const userProfile = useSelector(passwordSelector);
+
+  const handleChangePassword = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+    const { username, birthdate, email, password, newpassword } = data;
+    dispatch(login({ username, birthdate, email, password: newpassword }));
+    dispatch(setNewUser({ username, birthdate, email, password: newpassword }));
+  };
+
   return (
     <>
       <Container>
@@ -23,7 +43,11 @@ export const SettingsPage = () => {
             text="Change photo"
           />
 
-          <form action="/" className={styles.rootForm}>
+          <Form
+            action="/"
+            className={styles.rootForm}
+            onSubmit={handleChangePassword}
+          >
             <label htmlFor="username" className={styles.rootLabel}>
               Username
             </label>
@@ -49,8 +73,8 @@ export const SettingsPage = () => {
               Email
             </label>
             <Input
-              id="Email"
-              name="Email"
+              id="email"
+              name="email"
               className={styles.rootInput}
               type="email"
               placeholder="jamie@gmail.com"
@@ -72,14 +96,14 @@ export const SettingsPage = () => {
             </label>
             <Input
               id="newpassword"
-              name="password"
+              name="newpassword"
               className={styles.rootInput}
               type="newpassword"
               placeholder="new password"
               required
             />
             <Button className={styles.rootBtn} type="submit" text="Save" />
-          </form>
+          </Form>
         </div>
       </Container>
       <Footer />
