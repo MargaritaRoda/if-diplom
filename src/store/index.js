@@ -6,12 +6,14 @@ import storage from 'redux-persist/lib/storage';
 import { apiSlice } from './slicers/apiSlice';
 import allOrders from './slicers/allOrders.slicer';
 import allUsers from './slicers/allUsers.slicer';
+import inputSearchText from './slicers/inputSearchText.slicer';
 
 const rootReducer = combineReducers({
   [user.name]: user.reducer,
   [allOrders.name]: allOrders.reducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
   [allUsers.name]: allUsers.reducer,
+  [inputSearchText.name]: inputSearchText.reducer,
 });
 
 const persistConfig = {

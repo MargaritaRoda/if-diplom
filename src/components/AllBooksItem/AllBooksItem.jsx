@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import styles from './AllBooksItem.module.scss';
 import { Button } from '../Button';
 import { Icon } from '../Icon';
-import { makeRatio, randomRatio } from '../../lib/makeRatio';
+import { makeRatio } from '../../lib/makeRatio';
 import { cutBookTitle } from '../../lib/cutBookTitle';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOrder } from '../../store/slicers/allOrders.slicer';
-import { allBooks } from '../../store/selectors/apiAllBooks.selector';
 import classNames from 'classnames';
 import { userInfo } from '../../store/selectors/user.selector';
+import { allOrderBooks } from '../../store/selectors/allOrders.selector';
+import { findingBook } from '../../lib/findingBook';
 
 export const AllBooksItem = ({
   alt,
@@ -24,18 +25,22 @@ export const AllBooksItem = ({
   length,
   available,
 }) => {
-  const starRatio = makeRatio(randomRatio);
+  const allOrdersList = useSelector(allOrderBooks);
+  const [returnBook, setReturnBook] = useState(false);
+
+  const starRatio = makeRatio(ratio);
 
   const dispatch = useDispatch();
   const userEmail = useSelector(userInfo);
+  const taken = findingBook(allOrdersList, id);
+
+  const [status, setStatus] = useState(taken);
 
   const handleOrderBook = (event) => {
     event.preventDefault();
+    setReturnBook(!returnBook);
+    setStatus((prevState) => (prevState ? status : !status));
     dispatch(setOrder({ bookId: id, email: userEmail }));
-  };
-
-  const handleAvailableBook = (event) => {
-    event.preventDefault();
   };
 
   return (
@@ -49,12 +54,11 @@ export const AllBooksItem = ({
       </NavLink>
       <Button
         className={
-          available
-            ? classNames(styles.AllBooksItemBtn)
-            : classNames(styles.AllBooksItemBtn, styles.AllBooksItemBtn_taken)
+          status
+            ? classNames(styles.AllBooksItemBtn, styles.AllBooksItemBtn_taken)
+            : classNames(styles.AllBooksItemBtn)
         }
-        text={available ? 'Available' : 'Taken'}
-        onClick={handleAvailableBook}
+        text={status ? 'Taken' : 'Available'}
       />
 
       <h4 className={styles.AllBooksItemTitle}>{cutBookTitle(name)}</h4>
@@ -67,7 +71,7 @@ export const AllBooksItem = ({
 
       <Button
         className={styles.AllBooksItemBtnOrder}
-        text="Order"
+        text={returnBook ? 'Return' : 'Order'}
         onClick={handleOrderBook}
       />
     </div>

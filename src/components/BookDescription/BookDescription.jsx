@@ -3,8 +3,11 @@ import styles from './BookDescription.module.scss';
 import { Button } from '../Button';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { makeRatio, randomRatio } from '../../lib/makeRatio';
+import { makeRatio } from '../../lib/makeRatio';
 import { Icon } from '../Icon';
+import { setOrder } from '../../store/slicers/allOrders.slicer';
+import { useDispatch, useSelector } from 'react-redux';
+import { userInfo } from '../../store/selectors/user.selector';
 
 export const BookDescription = ({
   title,
@@ -19,12 +22,21 @@ export const BookDescription = ({
 }) => {
   const [showBtn, setShowBtn] = useState(true);
   const [showClass, setShowClass] = useState(true);
+  const [returnBook, setReturnBook] = useState(false);
+  const dispatch = useDispatch();
+  const userEmail = useSelector(userInfo);
 
-  const starRatio = makeRatio(randomRatio);
+  const starRatio = makeRatio(ratio);
 
   const handleShowText = () => {
     setShowBtn(!showBtn);
     setShowClass(!showClass);
+  };
+
+  const handleOrderBook = (event) => {
+    event.preventDefault();
+    setReturnBook(!returnBook);
+    dispatch(setOrder({ bookId: id, email: userEmail }));
   };
 
   return (
@@ -42,7 +54,11 @@ export const BookDescription = ({
       <div
         className={styles.bookDescriptionRelease}
       >{`${length} pages, released in ${released}`}</div>
-      <Button className={styles.bookDescriptionBtn} text="Order" />
+      <Button
+        className={styles.bookDescriptionBtn}
+        text={returnBook ? 'Return' : 'Order'}
+        onClick={handleOrderBook}
+      />
       <h4 className={styles.bookDescriptionSubTitle}>About book</h4>
       <p
         className={classNames(

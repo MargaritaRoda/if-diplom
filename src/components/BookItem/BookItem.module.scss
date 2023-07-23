@@ -7,6 +7,8 @@
   color: var(--black);
 }
 .img {
+  width: 122px;
+  aspect-ratio: 1/1.5;
 }
 .title {
   font-size: 12px;
@@ -19,4 +21,9 @@
   border: 1px solid var(--secondary-gray);
   background-color: var(--secondary-gray);
   color: var(--white);
+}
+.ratioStar {
+  width: 15px;
+  aspect-ratio: 15/14;
+  margin-right: 3%;
 }

@@ -16,7 +16,7 @@ export const BookPage = () => {
         <Container>
           <Header />
 
-          <ArticleContainer className={styles.bookList}>
+          <div className={styles.bookList}>
             <BookDescription
               src={state.imageUrl}
               alt={state.name}
@@ -26,7 +26,7 @@ export const BookPage = () => {
               released={state.released}
               length={state.length}
             />
-          </ArticleContainer>
+          </div>
         </Container>
       </div>
       <Footer />

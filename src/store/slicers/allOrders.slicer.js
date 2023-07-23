@@ -6,7 +6,13 @@ const allOrders = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     setOrder: (state, { payload: { bookId, email } }) => {
-      return [...state, { bookId, date: new Date().toString(), email }];
+      const isOrderNotUniq = state.some((item) => {
+        return item.bookId === bookId && item.email === email;
+      });
+      if (isOrderNotUniq) {
+        return state;
+      }
+      return [...state, { bookId, date: Date.now(), email }];
     },
   },
 });

@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Input.module.scss';
 import classNames from 'classnames';
+import { Form } from 'react-router-dom';
 
 export const Input = ({
   type,
@@ -9,6 +10,7 @@ export const Input = ({
   name,
   id,
   value,
+  onClick,
   required,
   readonly,
 }) => {
@@ -22,6 +24,7 @@ export const Input = ({
       value={value}
       required={required}
       readOnly={readonly}
+      onClick={onClick}
     />
   );
 };

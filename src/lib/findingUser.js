@@ -1,7 +1,4 @@
-import { array } from 'prop-types';
-
 export const findingUser = (arrayItems, obj) => {
-  // return  (arrayItems.find((item) => (JSON.stringify(item) === JSON.stringify(obj))));
   return arrayItems.find((item) => {
     return item.username === obj.username && item.password === obj.password;
   });

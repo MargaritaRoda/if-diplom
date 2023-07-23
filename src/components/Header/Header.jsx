@@ -9,8 +9,14 @@ import classNames from 'classnames';
 import { DropDown } from '../../pages/DropDown';
 import { createPortal } from 'react-dom';
 import { isUserAuthorized } from '../../store/selectors/user.selector';
+import { Form } from 'react-router-dom';
 
-export const Header = ({ onClick, onClick2, isActive = false }) => {
+export const Header = ({
+  onClick,
+  getSearchResult,
+  value,
+  isActive = false,
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const isUserAuth = useSelector(isUserAuthorized);
   console.log('authorize', isUserAuth);
@@ -32,11 +38,14 @@ export const Header = ({ onClick, onClick2, isActive = false }) => {
               styles.headerInput_active,
             )}
             placeholder="  &#128269; Search by author, title, name"
+            onClick={getSearchResult}
+            value={value}
           />
         ) : (
           <Input
             className={styles.headerInput}
             placeholder="  &#128269; Search by author, title, name"
+            readonly
           />
         )}
       </div>

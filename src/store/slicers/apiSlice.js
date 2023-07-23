@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_BOOKS } from '../../services/config/index';
+import { randomInteger } from '../../lib/makeRatio';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -14,19 +15,10 @@ export const apiSlice = createApi({
         // приводим данные ответа к нужному формату
         const books = response.map((book) => ({
           ...book,
-          ratio: 3,
+          ratio: randomInteger(0, 5),
         }));
         return books;
       },
-
-      // transformResponse: (response, meta, arg) => {
-      //     // response.data
-      //     return response.data.map((book) => {
-      //         // book.available = randomAvailable()
-      //         book.ratio = randomRatio()
-      //         return book
-      //     })
-      // },
     }),
   }),
 });
