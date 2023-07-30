@@ -8,9 +8,9 @@
   border: 1px solid var(--secondary-gray);
   color: var(--black);
   margin-bottom: 5%;
-  &::placeholder {
-    color: var(--black);
-  }
+  //&::placeholder {
+  //  color: var(--black);
+  //}
 }
 .rootForm {
   display: flex;

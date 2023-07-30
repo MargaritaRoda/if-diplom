@@ -1,8 +1,17 @@
-export const selectAllInformation = (state) => {
+/**
+ *
+ * @param state
+ * @returns {
+ *     username: String,
+ *     email: String,
+ *     birthdate: String,
+ * }
+ */
+export const selectUser = (state) => {
   return state.user;
 };
 
-export const userInfo = (state) => {
+export const selectUserEmail = (state) => {
   return state.user.email;
 };
 export const usernameSelector = (state) => {

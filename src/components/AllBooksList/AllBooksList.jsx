@@ -9,8 +9,8 @@ export const AllBooksList = ({ items, isLoading, numberOfBooks }) => {
 
   return (
     <>
-      {items
-        .map((item) => (
+      {
+        items.map((item) => (
           <AllBooksItem
             src={item.imageUrl}
             ratio={item.ratio}
@@ -20,7 +20,8 @@ export const AllBooksList = ({ items, isLoading, numberOfBooks }) => {
             {...item}
           />
         ))
-        .slice(0, numberOfBooks)}
+        // .slice(0, numberOfBooks)
+      }
     </>
   );
 };

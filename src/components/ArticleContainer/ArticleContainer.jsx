@@ -4,15 +4,6 @@ import classNames from 'classnames';
 import { Loader } from '../Loader';
 
 export const ArticleContainer = ({ className, children, isLoading, text }) => {
-  if (isLoading) {
-    return (
-      <Loader
-        lassName={styles.rootText}
-        text="Oops! You are not waiting for any book "
-      />
-    );
-  }
-
   return (
     <main className={classNames(styles.root, className)}>
       {!children.length ? <p className={styles.rootText}>{text}</p> : children}

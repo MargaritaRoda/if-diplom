@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Input.module.scss';
 import classNames from 'classnames';
-import { Form } from 'react-router-dom';
 
 export const Input = ({
   type,
@@ -9,8 +8,9 @@ export const Input = ({
   placeholder,
   name,
   id,
+  defaultValue,
   value,
-  onClick,
+  onChange,
   required,
   readonly,
 }) => {
@@ -21,10 +21,11 @@ export const Input = ({
       placeholder={placeholder}
       name={name}
       id={id}
+      defaultValue={defaultValue}
       value={value}
       required={required}
       readOnly={readonly}
-      onClick={onClick}
+      onChange={onChange}
     />
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './AllBooksItem.module.scss';
 import { Button } from '../Button';
 import { Icon } from '../Icon';
@@ -6,11 +6,11 @@ import { makeRatio } from '../../lib/makeRatio';
 import { cutBookTitle } from '../../lib/cutBookTitle';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setOrder } from '../../store/slicers/allOrders.slicer';
+import { setOrder, unsetOrder } from '../../store/slicers/allOrders.slicer';
 import classNames from 'classnames';
-import { userInfo } from '../../store/selectors/user.selector';
-import { allOrderBooks } from '../../store/selectors/allOrders.selector';
-import { findingBook } from '../../lib/findingBook';
+import { selectUserEmail } from '../../store/selectors/user.selector';
+import { selectAllOrderBooks } from '../../store/selectors/allOrders.selector';
+import { isBookTaken } from '../../lib/findingBook';
 
 export const AllBooksItem = ({
   alt,
@@ -18,28 +18,32 @@ export const AllBooksItem = ({
   author,
   imageUrl,
   ratio,
-  textBtn,
   id,
   released,
   description,
   length,
-  available,
 }) => {
-  const allOrdersList = useSelector(allOrderBooks);
-  const [returnBook, setReturnBook] = useState(false);
+  const allOrdersList = useSelector(selectAllOrderBooks);
 
   const starRatio = makeRatio(ratio);
 
   const dispatch = useDispatch();
-  const userEmail = useSelector(userInfo);
-  const taken = findingBook(allOrdersList, id);
+  const userEmail = useSelector(selectUserEmail);
+  const isTakenByAnyone = isBookTaken(allOrdersList, id);
 
-  const [status, setStatus] = useState(taken);
+  const isTakenByCurrentUser = Boolean(
+    allOrdersList.find(
+      (order) => order.bookId === id && order.email === userEmail,
+    ),
+  );
 
-  const handleOrderBook = (event) => {
+  const handleReturnBook = (event) => {
     event.preventDefault();
-    setReturnBook(!returnBook);
-    setStatus((prevState) => (prevState ? status : !status));
+    dispatch(unsetOrder({ bookId: id, email: userEmail }));
+  };
+
+  const handleTakeBook = (event) => {
+    event.preventDefault();
     dispatch(setOrder({ bookId: id, email: userEmail }));
   };
 
@@ -47,18 +51,18 @@ export const AllBooksItem = ({
     <div className={styles.AllBooksItem}>
       <NavLink
         to={`/books/${id}`}
-        state={{ alt, name, author, imageUrl, released, description, length }}
+        // state={{ alt, name, author, imageUrl, released, description, length }}
         className={styles.AllBooksItemImg}
       >
         <img src={imageUrl} alt={alt} className={styles.AllBooksItemImg} />
       </NavLink>
       <Button
         className={
-          status
+          isTakenByAnyone
             ? classNames(styles.AllBooksItemBtn, styles.AllBooksItemBtn_taken)
             : classNames(styles.AllBooksItemBtn)
         }
-        text={status ? 'Taken' : 'Available'}
+        text={isTakenByAnyone ? 'Taken' : 'Available'}
       />
 
       <h4 className={styles.AllBooksItemTitle}>{cutBookTitle(name)}</h4>
@@ -71,8 +75,8 @@ export const AllBooksItem = ({
 
       <Button
         className={styles.AllBooksItemBtnOrder}
-        text={returnBook ? 'Return' : 'Order'}
-        onClick={handleOrderBook}
+        text={isTakenByCurrentUser ? 'Return' : 'Order'}
+        onClick={isTakenByCurrentUser ? handleReturnBook : handleTakeBook}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styles from './Header.module.scss';
 import { Icon } from '../Icon';
 import { Input } from '../Input';
@@ -9,17 +9,16 @@ import classNames from 'classnames';
 import { DropDown } from '../../pages/DropDown';
 import { createPortal } from 'react-dom';
 import { isUserAuthorized } from '../../store/selectors/user.selector';
-import { Form } from 'react-router-dom';
 
-export const Header = ({
-  onClick,
-  getSearchResult,
-  value,
-  isActive = false,
-}) => {
+export const Header = ({ onClick, onSearchTextChange, value }) => {
   const [isVisible, setIsVisible] = useState(false);
+
+  const handleUserMenuHiding = useCallback(() => {
+    setIsVisible(false);
+  }, []);
+
   const isUserAuth = useSelector(isUserAuthorized);
-  console.log('authorize', isUserAuth);
+  // console.log('authorize', isUserAuth);
 
   const handleOpenDropDown = (event) => {
     setIsVisible(!isVisible);
@@ -37,14 +36,14 @@ export const Header = ({
               styles.headerInput,
               styles.headerInput_active,
             )}
-            placeholder="  &#128269; Search by author, title, name"
-            onClick={getSearchResult}
+            placeholder="&#128269; Search by author, title, name"
+            onChange={onSearchTextChange}
             value={value}
           />
         ) : (
           <Input
             className={styles.headerInput}
-            placeholder="  &#128269; Search by author, title, name"
+            placeholder="&#128269; Search by author, title, name"
             readonly
           />
         )}
@@ -52,8 +51,8 @@ export const Header = ({
       <HeaderNav>
         {isUserAuth ? (
           <>
-            <HeaderNavLink text="All books" isActive path={'/allBooksPage'} />
-            <HeaderNavLink text="Your orders" isActive path={'/MainUserPage'} />
+            <HeaderNavLink text="All books" isActive path={'/books'} />
+            <HeaderNavLink text="Your orders" isActive path={'/orders'} />
             <Icon
               name="account"
               className={styles.headerAccount}
@@ -71,8 +70,9 @@ export const Header = ({
             <HeaderNavLink text="Sign Up" onClick={onClick} path={'/signup'} />
           </>
         )}
+        <DropDown visible={isVisible} onHidden={handleUserMenuHiding} />
       </HeaderNav>
-      {createPortal(<DropDown visible={isVisible} />, document.body)}
+      {/*{createPortal(<DropDown visible={isVisible} />, document.body)}*/}
     </header>
   );
 };

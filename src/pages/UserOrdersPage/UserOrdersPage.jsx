@@ -1,18 +1,23 @@
 import React from 'react';
-import styles from './MainUserPage.module.scss';
+import styles from './UserOrdersPage.module.scss';
 import { Header } from '../../components/Header';
 import { ArticleContainer } from '../../components/ArticleContainer';
 import { BookItem } from '../../components/BookItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserAvailablePendingBooks } from '../../lib/allOrdersFunc';
-import { userInfo } from '../../store/selectors/user.selector';
-import { allOrderBooks } from '../../store/selectors/allOrders.selector';
+import { selectUserEmail } from '../../store/selectors/user.selector';
+import { selectAllOrderBooks } from '../../store/selectors/allOrders.selector';
+import {
+  unsetOrder,
+  refreshOrders,
+} from '../../store/slicers/allOrders.slicer';
 import { useGetAllBooksQuery } from '../../store/slicers/apiSlice';
 import { Footer } from '../../components/Footer';
+import { PageLayout } from '../../components/PageLayout';
 
-export const MainUserPage = () => {
-  const userId = useSelector(userInfo);
-  const allOrderInfo = useSelector(allOrderBooks);
+export const UserOrdersPage = () => {
+  const userEmail = useSelector(selectUserEmail);
+  const allOrderInfo = useSelector(selectAllOrderBooks);
   const { data: books, isLoading } = useGetAllBooksQuery();
 
   const dispatch = useDispatch();
@@ -20,12 +25,13 @@ export const MainUserPage = () => {
   const [pending, available] = getUserAvailablePendingBooks(
     books || [],
     allOrderInfo,
-    userId,
+    userEmail,
   );
 
   console.log('pending', pending);
+  console.log('available', available);
   return (
-    <>
+    <PageLayout>
       <div className={styles.mainUserPage}>
         <div className={styles.container}>
           <Header />
@@ -43,7 +49,7 @@ export const MainUserPage = () => {
                     name={item.name}
                     imageUrl={item.imageUrl}
                     ratio={item.ratio}
-                    textBtn="Check status"
+                    isPendingOrder
                     key={item.id}
                     {...item}
                   />
@@ -63,7 +69,6 @@ export const MainUserPage = () => {
                     name={item.name}
                     imageUrl={item.imageUrl}
                     ratio={item.ratio}
-                    textBtn="Return"
                     key={item.id}
                     {...item}
                   />
@@ -74,6 +79,6 @@ export const MainUserPage = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </PageLayout>
   );
 };

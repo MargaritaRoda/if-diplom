@@ -5,6 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 const PUBLIC_URL = '';
+const IS_DEV = process.env.NODE_ENV !== 'production';
 
 const config = {
   entry: path.resolve(__dirname, '../src/index.js'),
@@ -13,6 +14,7 @@ const config = {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].[hash].js',
     assetModuleFilename: 'static/media/[name].[hash][ext]',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -23,7 +25,11 @@ const config = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
+              modules: {
+                localIdentName: IS_DEV
+                  ? '[path][name]__[local]--[hash:base64:5]'
+                  : '[hash:base64:5]',
+              },
               sourceMap: true,
             },
           },

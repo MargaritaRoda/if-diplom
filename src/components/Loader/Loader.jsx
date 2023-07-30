@@ -9,3 +9,7 @@ export const Loader = ({ className, text }) => {
     </main>
   );
 };
+
+Loader.defaultProps = {
+  text: 'Loading...',
+};

@@ -5,9 +5,14 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { makeRatio } from '../../lib/makeRatio';
 import { Icon } from '../Icon';
-import { setOrder } from '../../store/slicers/allOrders.slicer';
+import {
+  refreshOrders,
+  setOrder,
+  unsetOrder,
+} from '../../store/slicers/allOrders.slicer';
 import { useDispatch, useSelector } from 'react-redux';
-import { userInfo } from '../../store/selectors/user.selector';
+import { selectUserEmail } from '../../store/selectors/user.selector';
+import { selectAllOrderBooks } from '../../store/selectors/allOrders.selector';
 
 export const BookDescription = ({
   title,
@@ -19,24 +24,40 @@ export const BookDescription = ({
   released,
   description,
   length,
+  ...props
 }) => {
-  const [showBtn, setShowBtn] = useState(true);
-  const [showClass, setShowClass] = useState(true);
-  const [returnBook, setReturnBook] = useState(false);
+  console.log('props: ', props);
+
+  const [showShortText, setShowShortText] = useState(true);
   const dispatch = useDispatch();
-  const userEmail = useSelector(userInfo);
+  const userEmail = useSelector(selectUserEmail);
+  const allOrdersList = useSelector(selectAllOrderBooks);
 
   const starRatio = makeRatio(ratio);
 
+  console.log('id: ', id);
+
+  const isTakenByCurrentUser = Boolean(
+    allOrdersList.find(
+      (order) => order.bookId === id && order.email === userEmail,
+    ),
+  );
+
+  console.log('isTakenByCurrentUser:', isTakenByCurrentUser);
+
   const handleShowText = () => {
-    setShowBtn(!showBtn);
-    setShowClass(!showClass);
+    setShowShortText((currentState) => !currentState);
   };
 
   const handleOrderBook = (event) => {
     event.preventDefault();
-    setReturnBook(!returnBook);
+    // setReturnBook(!returnBook);
     dispatch(setOrder({ bookId: id, email: userEmail }));
+  };
+
+  const handleReturnBook = (event) => {
+    event.preventDefault();
+    dispatch(unsetOrder({ bookId: id, email: userEmail }));
   };
 
   return (
@@ -56,25 +77,24 @@ export const BookDescription = ({
       >{`${length} pages, released in ${released}`}</div>
       <Button
         className={styles.bookDescriptionBtn}
-        text={returnBook ? 'Return' : 'Order'}
-        onClick={handleOrderBook}
+        text={isTakenByCurrentUser ? 'Return' : 'Order'}
+        onClick={isTakenByCurrentUser ? handleReturnBook : handleOrderBook}
       />
       <h4 className={styles.bookDescriptionSubTitle}>About book</h4>
-      <p
+
+      <div
         className={classNames(
           styles.bookDescriptionDescr,
-          showClass && styles.bookDescriptionDescrShort,
+          showShortText && styles.bookDescriptionDescr_short,
         )}
         onClick={handleShowText}
-      >
-        {description}
-      </p>
+        dangerouslySetInnerHTML={{ __html: description }}
+      />
 
-      {showBtn && (
+      {showShortText && (
         <Button
           className={styles.bookDescriptionBtnShow}
           text="Show more"
-          visible={showBtn}
           onClick={handleShowText}
         />
       )}

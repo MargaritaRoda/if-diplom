@@ -6,8 +6,10 @@ export const useStyles = createUseStyles(
       root: {
         backgroundColor: 'var(--secondary-blue)',
         color: 'var(--black)',
-        maxHeight: 300,
-        // fill: theme.accentDarkText,
+        maxHeight: 200,
+        width: '100%',
+        // position: 'absolute',
+        // top: '82%',
       },
       // footerContainer: {
       //   Height: '100hv',
@@ -33,6 +35,7 @@ export const useStyles = createUseStyles(
       footerItems: {
         display: 'flex',
         paddingTop: 40,
+        paddingBottom: 40,
         '@media (max-width: 360px)': {
           margin: '0 auto 32px',
         },

@@ -9,8 +9,16 @@ const allUsers = createSlice({
     setNewUser: (state, { payload }) => {
       return [...state, payload];
     },
+    updateUser: (state, { payload: { oldEmail, newUser } }) => {
+      return state.map((user) => {
+        if (user.email === oldEmail) {
+          return newUser;
+        }
+        return user;
+      });
+    },
   },
 });
 const { actions } = allUsers;
-export const { setNewUser } = actions;
+export const { setNewUser, updateUser } = actions;
 export default allUsers;

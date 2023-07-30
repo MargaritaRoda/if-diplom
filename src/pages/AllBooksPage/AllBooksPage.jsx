@@ -4,46 +4,41 @@ import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Container } from '../../components/Container';
 import { Footer } from '../../components/Footer';
+import { PageLayout } from '../../components/PageLayout';
 import { useGetAllBooksQuery } from '../../store/slicers/apiSlice';
 import { AllBooksList } from '../../components/AllBooksList';
 import { useDispatch, useSelector } from 'react-redux';
 import { setInputSearchText } from '../../store/slicers/inputSearchText.slicer';
-import { insertSearchText } from '../../store/selectors/inputSearchText.selector';
+import { selectSearchText } from '../../store/selectors/inputSearchText.selector';
 
 export const AllBooksPage = () => {
   const dispatch = useDispatch();
-  const resultInput = useSelector(insertSearchText);
+  const searchText = useSelector(selectSearchText);
 
-  console.log('resultInput', resultInput);
+  console.log('resultInput', searchText);
 
   const [quantityBook, setQuantityBook] = useState(4);
   // console.log('allBooksPage render');
 
   const { data: books, isLoading } = useGetAllBooksQuery(undefined, {
     selectFromResult: (state) => {
-      // console.log(state)
-      // // if (resultInput !== '') {
-      // //   return books?.filter(
-      // //     (item) =>
-      // //       item.name.includes(resultInput) ||
-      // //       item.author.includes(resultInput),
-      // //   );
-      // // }
-      // // return books
       return state;
     },
   });
 
-  let filteredBook = books;
-  console.log();
-  console.log(resultInput);
+  let filteredBook = books || [];
 
-  if (filteredBook && resultInput) {
+  console.log(searchText);
+
+  if (searchText) {
     filteredBook = filteredBook.filter(
       (item) =>
-        item.name.includes(resultInput) || item.author.includes(resultInput),
+        item.name.toLowerCase().includes(searchText) ||
+        item.author.toLowerCase().includes(searchText),
     );
   }
+
+  filteredBook = filteredBook.slice(0, quantityBook);
 
   console.log(filteredBook);
 
@@ -58,24 +53,26 @@ export const AllBooksPage = () => {
   };
 
   return (
-    <>
+    <PageLayout>
       <Container>
-        <Header isActive={true} getSearchResult={handleSearchResults} />
+        <Header isActive={true} onSearchTextChange={handleSearchResults} />
         <h3 className={styles.allBooksPageTitle}>All books</h3>
         <div className={styles.allBooksPageWrapper}>
           <AllBooksList
             items={filteredBook}
             isLoading={isLoading}
-            numberOfBooks={quantityBook}
+            // numberOfBooks={quantityBook}
           />
         </div>
-        <Button
-          text="Show More"
-          className={styles.allBooksPageBtn}
-          onClick={handleShowMoreBooks}
-        />
+        <div className={styles.actions}>
+          <Button
+            text="Show More"
+            className={styles.allBooksPageBtn}
+            onClick={handleShowMoreBooks}
+          />
+        </div>
       </Container>
       <Footer />
-    </>
+    </PageLayout>
   );
 };

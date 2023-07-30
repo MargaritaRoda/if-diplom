@@ -4,14 +4,14 @@ import { Input } from '../../components/Input';
 import { UserForm } from '../../components/UserForm';
 import { Form, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { allUsersSelector } from '../../store/selectors/allUsers.selector';
+import { selectAllUsers } from '../../store/selectors/allUsers.selector';
 import { Button } from '../../components/Button';
 import { findingUser } from '../../lib/findingUser';
 import { login } from '../../store/slicers/user.slicer';
 
-export const AuthorizationPage = () => {
+export const AuthorizationPage = ({ visible }) => {
   const dispatch = useDispatch();
-  const allUsersList = useSelector(allUsersSelector);
+  const allUsersList = useSelector(selectAllUsers);
   console.log('allUsersList', allUsersList);
 
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export const AuthorizationPage = () => {
     if (!user) {
       navigate('/signup');
     } else {
-      navigate('/allBooksPage');
+      navigate('/books');
       dispatch(login(user));
     }
   };
