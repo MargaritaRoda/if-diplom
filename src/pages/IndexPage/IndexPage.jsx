@@ -1,13 +1,10 @@
 import React from 'react';
 import styles from './IndexPage.module.scss';
-import { useNavigate } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { Button } from '../../components/Button';
 import { ArticleContainer } from '../../components/ArticleContainer';
 import { Icon } from '../../components/Icon';
 import { Container } from '../../components/Container';
-import { createPortal } from 'react-dom';
-import { AuthorizationPage } from '../AuthorizationPage';
 
 const PUBLIC_PATH = process.env.PUBLIC_URL;
 

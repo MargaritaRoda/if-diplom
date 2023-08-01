@@ -11,12 +11,13 @@
 }
 
 .headerInputWrap {
+  display: flex;
+  align-items: center;
+  background-color: var(--white);
+  padding: 0 8px;
   flex-basis: 50%;
-}
-
-.headerInput {
+  border-radius: 8px;
   border: solid 2px var(--general-red);
-
   &_active {
     border: solid 2px var(--secondary-gray);
   }

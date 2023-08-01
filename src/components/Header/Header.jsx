@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import styles from './Header.module.scss';
 import { Icon } from '../Icon';
 import { Input } from '../Input';
@@ -7,11 +7,12 @@ import { HeaderNavLink } from '../HeaderNavLink';
 import { useSelector } from 'react-redux';
 import classNames from 'classnames';
 import { DropDown } from '../../pages/DropDown';
-import { createPortal } from 'react-dom';
 import { isUserAuthorized } from '../../store/selectors/user.selector';
+import { useNavigate } from 'react-router-dom';
 
-export const Header = ({ onClick, onSearchTextChange, value }) => {
+export const Header = ({ onClick, onSearchTextChange }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
 
   const handleUserMenuHiding = useCallback(() => {
     setIsVisible(false);
@@ -20,33 +21,35 @@ export const Header = ({ onClick, onSearchTextChange, value }) => {
   const isUserAuth = useSelector(isUserAuthorized);
   // console.log('authorize', isUserAuth);
 
-  const handleOpenDropDown = (event) => {
+  const handleOpenDropDown = () => {
     setIsVisible(!isVisible);
+  };
+  const handleGoIndexPage = (event) => {
+    event.preventDefault();
+    navigate('/');
   };
 
   return (
     <header className={styles.header}>
       <div className={styles.headerLogo}>
-        <Icon name="mainLogo" />
+        <Icon name="mainLogo" onClick={handleGoIndexPage} />
       </div>
-      <div className={styles.headerInputWrap}>
-        {isUserAuth ? (
-          <Input
-            className={classNames(
-              styles.headerInput,
-              styles.headerInput_active,
-            )}
-            placeholder="&#128269; Search by author, title, name"
-            onChange={onSearchTextChange}
-            value={value}
-          />
-        ) : (
-          <Input
-            className={styles.headerInput}
-            placeholder="&#128269; Search by author, title, name"
-            readonly
-          />
-        )}
+
+      <div
+        className={
+          isUserAuth
+            ? classNames(styles.headerInputWrap, styles.headerInputWrap_active)
+            : styles.headerInputWrap
+        }
+      >
+        <Icon name="search" className={styles.headerInputSvg} />
+        <Input
+          className={styles.headerInput}
+          placeholder="Search by author, title, name"
+          onChange={onSearchTextChange}
+          readonly={!isUserAuth}
+        />
+
       </div>
       <HeaderNav>
         {isUserAuth ? (
@@ -72,7 +75,6 @@ export const Header = ({ onClick, onSearchTextChange, value }) => {
         )}
         <DropDown visible={isVisible} onHidden={handleUserMenuHiding} />
       </HeaderNav>
-      {/*{createPortal(<DropDown visible={isVisible} />, document.body)}*/}
     </header>
   );
 };
