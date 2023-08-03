@@ -1,3 +1,5 @@
+@use 'src/global' as *;
+
 .mainSection {
   background-color: var(--secondary-blue);
   box-shadow: -2px 4px 4px 0px rgba(97, 97, 97, 0.5);
@@ -10,6 +12,9 @@
   gap: 24px;
   flex-basis: 30%;
   margin: 10% 5%;
+  @include small() {
+    align-items: center;
+  }
 }
 
 .mainTitle {
@@ -35,6 +40,9 @@
   display: flex;
   flex-basis: 70%;
   justify-content: center;
+  @include small() {
+    display: none;
+  }
 }
 
 .mainImg {

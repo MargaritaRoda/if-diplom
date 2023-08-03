@@ -1,6 +1,11 @@
 .root {
   border-radius: 8px;
+  border: 1px solid var(--secondary-gray);
   width: 100%;
   height: 44px;
   padding: 0 15px;
+  transition: all ease-in-out 200ms;
+  &:focus {
+    border-color: var(--gray);
+  }
 }

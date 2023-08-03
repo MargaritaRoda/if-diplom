@@ -3,14 +3,10 @@ import styles from './UserOrdersPage.module.scss';
 import { Header } from '../../components/Header';
 import { ArticleContainer } from '../../components/ArticleContainer';
 import { BookItem } from '../../components/BookItem';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getUserAvailablePendingBooks } from '../../lib/allOrdersFunc';
 import { selectUserEmail } from '../../store/selectors/user.selector';
 import { selectAllOrderBooks } from '../../store/selectors/allOrders.selector';
-import {
-  unsetOrder,
-  refreshOrders,
-} from '../../store/slicers/allOrders.slicer';
 import { useGetAllBooksQuery } from '../../store/slicers/apiSlice';
 import { Footer } from '../../components/Footer';
 import { PageLayout } from '../../components/PageLayout';
@@ -18,9 +14,7 @@ import { PageLayout } from '../../components/PageLayout';
 export const UserOrdersPage = () => {
   const userEmail = useSelector(selectUserEmail);
   const allOrderInfo = useSelector(selectAllOrderBooks);
-  const { data: books, isLoading } = useGetAllBooksQuery();
-
-  const dispatch = useDispatch();
+  const { data: books } = useGetAllBooksQuery();
 
   const [pending, available] = getUserAvailablePendingBooks(
     books || [],

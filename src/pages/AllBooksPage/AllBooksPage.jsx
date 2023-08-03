@@ -13,12 +13,11 @@ import { selectSearchText } from '../../store/selectors/inputSearchText.selector
 
 export const AllBooksPage = () => {
   const dispatch = useDispatch();
+
+  /** @type {{ searchText: String }} */
   const searchText = useSelector(selectSearchText);
 
-  console.log('resultInput', searchText);
-
   const [quantityBook, setQuantityBook] = useState(4);
-  // console.log('allBooksPage render');
 
   const { data: books, isLoading } = useGetAllBooksQuery(undefined, {
     selectFromResult: (state) => {
@@ -28,8 +27,6 @@ export const AllBooksPage = () => {
 
   let filteredBook = books || [];
 
-  console.log(searchText);
-
   if (searchText) {
     filteredBook = filteredBook.filter(
       (item) =>
@@ -37,7 +34,6 @@ export const AllBooksPage = () => {
         item.author.toLowerCase().includes(searchText),
     );
   }
-
   filteredBook = filteredBook.slice(0, quantityBook);
 
   console.log(filteredBook);
@@ -48,7 +44,7 @@ export const AllBooksPage = () => {
     dispatch(setInputSearchText({ searchText: insertText }));
   };
 
-  const handleShowMoreBooks = (event) => {
+  const handleShowMoreBooks = () => {
     setQuantityBook((prevState) => prevState + 4);
   };
 
@@ -58,11 +54,7 @@ export const AllBooksPage = () => {
         <Header isActive={true} onSearchTextChange={handleSearchResults} />
         <h3 className={styles.allBooksPageTitle}>All books</h3>
         <div className={styles.allBooksPageWrapper}>
-          <AllBooksList
-            items={filteredBook}
-            isLoading={isLoading}
-            // numberOfBooks={quantityBook}
-          />
+          <AllBooksList items={filteredBook} isLoading={isLoading} />
         </div>
         <div className={styles.actions}>
           <Button

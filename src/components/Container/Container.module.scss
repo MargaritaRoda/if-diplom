@@ -1,12 +1,12 @@
+@use 'src/global' as *;
+
 .container {
   max-width: 1232px;
   margin: 0 auto;
   position: relative;
   width: 100%;
-  //@media (max-width: 1232px) {
-  //  padding: 120px 32px;
-  //}
-  //@media (max-width: 760px) {
-  //  padding: 40px 32px;
-  //}
+
+  @include medium() {
+    padding: 0 20px;
+  }
 }

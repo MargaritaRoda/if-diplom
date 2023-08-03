@@ -9,7 +9,7 @@ import { Loader } from '../../components/Loader';
 import { useGetAllBooksQuery } from '../../store/slicers/apiSlice';
 import { PageLayout } from '../../components/PageLayout';
 
-export const BookPage = (props) => {
+export const BookPage = () => {
   let { id: bookId } = useParams();
   const { data, isLoading } = useGetAllBooksQuery();
 

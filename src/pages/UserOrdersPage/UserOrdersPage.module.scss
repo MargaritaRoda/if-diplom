@@ -1,3 +1,5 @@
+@use 'src/global' as *;
+
 .mainUserPage {
   background-color: var(--background-gray);
   padding: 1% 0;
@@ -20,6 +22,11 @@
   display: flex;
   margin: 3%;
   gap: 8px;
+  @include medium() {
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
 .bookListTitle {

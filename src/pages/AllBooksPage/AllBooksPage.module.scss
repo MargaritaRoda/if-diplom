@@ -1,6 +1,7 @@
+@use 'src/global' as *;
+
 .allBooksPageWrapper {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   margin: 3%;
   gap: 28px;
@@ -13,7 +14,6 @@
 }
 .allBooksPageBtn {
   align-self: center;
-  //margin: 5% 50%;
   background-color: var(--general-red);
   border: 1px solid var(--general-red);
   width: 185px;

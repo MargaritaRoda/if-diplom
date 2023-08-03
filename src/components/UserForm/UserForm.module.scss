@@ -1,3 +1,5 @@
+@use 'src/global' as *;
+
 .root {
   display: flex;
   flex-direction: column;
@@ -10,9 +12,15 @@
   color: var(--black);
   background-color: var(--white);
   border-radius: 8px;
-  padding: 1%;
   z-index: 2;
   min-width: 320px;
+  padding: 20px 20px 40px 20px;
+  @include small() {
+    position: static;
+    transform: none;
+    width: 100%;
+    padding: 20px 20px 60px 20px;
+  }
 }
 
 .wrapperRegistrationPage {
@@ -22,7 +30,7 @@
   top: 0;
   background-color: var(--secondary-gray);
   opacity: 70%;
-  z-index: 1;
+  z-index: -1;
 }
 .rootCloseWrap {
   display: flex;

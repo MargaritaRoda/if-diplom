@@ -7,10 +7,7 @@ import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { Container } from '../../components/Container';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  passwordSelector,
-  selectUser,
-} from '../../store/selectors/user.selector';
+import { selectUser } from '../../store/selectors/user.selector';
 import { Form } from 'react-router-dom';
 import { login } from '../../store/slicers/user.slicer';
 import { updateUser } from '../../store/slicers/allUsers.slicer';
@@ -69,7 +66,6 @@ export const SettingsPage = () => {
             type="submit"
             text="Change photo"
           />
-          <code>{JSON.stringify(user)}</code>
           <Form
             action="/"
             className={styles.rootForm}

@@ -1,5 +1,4 @@
 // получить массив обьектов книг, которые выбрал текщий юзер
-import { logout } from '../store/slicers/user.slicer';
 
 const getUserOrders = (allOrders, userEmail) => {
   return allOrders.reduce((userOrders, order) => {

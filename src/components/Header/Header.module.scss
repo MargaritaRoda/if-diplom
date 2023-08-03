@@ -1,13 +1,30 @@
+@use 'src/global' as *;
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 20px;
   padding-bottom: 60px;
+  gap: 20px;
+  @include medium() {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  @include small() {
+    flex-direction: column;
+  }
 }
 
 .headerLogo {
   max-height: 35px;
+  flex: 0 0 250px;
+  > svg {
+    max-width: 172px;
+  }
+  @include medium() {
+    flex: 0 0 172px;
+  }
 }
 
 .headerInputWrap {
@@ -21,6 +38,18 @@
   &_active {
     border: solid 2px var(--secondary-gray);
   }
+  @include small() {
+    display: none;
+  }
+}
+.headerInputSvg {
+  width: 18px;
+  aspect-ratio: 1/1;
+}
+
+.headerInput {
+  border: none;
+  flex-shrink: 1;
 }
 
 .headerDropDown {

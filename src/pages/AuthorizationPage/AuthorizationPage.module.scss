@@ -1,3 +1,5 @@
+@use 'src/global' as *;
+
 .rootForm {
   display: flex;
   flex-direction: column;
@@ -10,12 +12,7 @@
 }
 
 .rootInput {
-  border: 1px solid var(--secondary-gray);
-  color: var(--black);
   margin-bottom: 5%;
-  &::placeholder {
-    color: var(--black);
-  }
 }
 .rootBtn {
   color: var(--white);

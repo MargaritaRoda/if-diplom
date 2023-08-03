@@ -1,3 +1,5 @@
+@use 'src/global' as *;
+
 .root {
   display: flex;
   flex-direction: column;
@@ -5,10 +7,18 @@
   gap: 8px;
   max-width: 122px;
   color: var(--black);
+
+  @include medium() {
+    max-width: 80%;
+  }
 }
 .img {
-  width: 122px;
+  //width: 122px;
+  width: 100%;
   aspect-ratio: 1/1.5;
+  //@include medium() {
+  //  max-width: 100;
+  //}
 }
 .title {
   font-size: 12px;

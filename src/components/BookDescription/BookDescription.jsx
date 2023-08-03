@@ -5,11 +5,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { makeRatio } from '../../lib/makeRatio';
 import { Icon } from '../Icon';
-import {
-  refreshOrders,
-  setOrder,
-  unsetOrder,
-} from '../../store/slicers/allOrders.slicer';
+import { setOrder, unsetOrder } from '../../store/slicers/allOrders.slicer';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserEmail } from '../../store/selectors/user.selector';
 import { selectAllOrderBooks } from '../../store/selectors/allOrders.selector';
@@ -65,6 +61,7 @@ export const BookDescription = ({
       <div className={styles.bookDescriptionImg}>
         <img src={src} alt={title} className={styles.bookDescriptionImg} />
       </div>
+      {/*<div>*/}
       <div className={styles.bookDescriptionRatio}>
         {starRatio.map((item, index) => {
           return <Icon name={item} key={index} className={styles.ratioStar} />;
@@ -98,6 +95,7 @@ export const BookDescription = ({
           onClick={handleShowText}
         />
       )}
+      {/*</div>*/}
     </div>
   );
 };

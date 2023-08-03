@@ -6,8 +6,6 @@ import { ArticleContainer } from '../../components/ArticleContainer';
 import { Icon } from '../../components/Icon';
 import { Container } from '../../components/Container';
 
-const PUBLIC_PATH = process.env.PUBLIC_URL;
-
 export const IndexPage = () => {
   return (
     <Container>

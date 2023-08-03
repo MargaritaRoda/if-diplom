@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import styles from './Header.module.scss';
+import { useNavigate } from 'react-router-dom';
 import { Icon } from '../Icon';
 import { Input } from '../Input';
 import { HeaderNav } from '../HeaderNav';
@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import classNames from 'classnames';
 import { DropDown } from '../../pages/DropDown';
 import { isUserAuthorized } from '../../store/selectors/user.selector';
-import { useNavigate } from 'react-router-dom';
+import styles from './Header.module.scss';
 
 export const Header = ({ onClick, onSearchTextChange }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,7 +19,6 @@ export const Header = ({ onClick, onSearchTextChange }) => {
   }, []);
 
   const isUserAuth = useSelector(isUserAuthorized);
-  // console.log('authorize', isUserAuth);
 
   const handleOpenDropDown = () => {
     setIsVisible(!isVisible);
@@ -49,7 +48,6 @@ export const Header = ({ onClick, onSearchTextChange }) => {
           onChange={onSearchTextChange}
           readonly={!isUserAuth}
         />
-
       </div>
       <HeaderNav>
         {isUserAuth ? (

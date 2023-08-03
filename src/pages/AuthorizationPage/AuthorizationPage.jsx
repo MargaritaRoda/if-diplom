@@ -9,7 +9,7 @@ import { Button } from '../../components/Button';
 import { findingUser } from '../../lib/findingUser';
 import { login } from '../../store/slicers/user.slicer';
 
-export const AuthorizationPage = ({ visible }) => {
+export const AuthorizationPage = () => {
   const dispatch = useDispatch();
   const allUsersList = useSelector(selectAllUsers);
   console.log('allUsersList', allUsersList);
@@ -36,8 +36,6 @@ export const AuthorizationPage = ({ visible }) => {
     }
   };
 
-  // navigate('/allBooksPage') && dispatch(getAuthorized({key: true}))
-
   return (
     <UserForm text="Log In to Fox Library">
       <Form method="get" className={styles.rootForm} onSubmit={handleAuthorize}>
@@ -48,7 +46,7 @@ export const AuthorizationPage = ({ visible }) => {
           id="username"
           name="username"
           className={styles.rootInput}
-          placeholder="jamie"
+          placeholder="Your username"
           required
         />
         <label htmlFor="password" className={styles.rootLabel}>
@@ -59,7 +57,7 @@ export const AuthorizationPage = ({ visible }) => {
           name="password"
           className={styles.rootInput}
           type="password"
-          placeholder="abcd"
+          placeholder="Your password"
           required
         />
         <Button className={styles.rootBtn} type="submit" text="Log in" />
