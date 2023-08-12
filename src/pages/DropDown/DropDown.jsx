@@ -25,7 +25,6 @@ export const DropDown = ({ visible, onHidden }) => {
     let isFirstClick = true;
 
     const handleClickOutside = (e) => {
-      console.log('clicked outside | visible: %s', visible, e.target);
       if (isFirstClick) {
         isFirstClick = false;
         return;
@@ -35,13 +34,11 @@ export const DropDown = ({ visible, onHidden }) => {
       }
     };
     if (visible) {
-      console.log('add callback into body | visible: %s', visible);
       document.addEventListener('click', handleClickOutside);
     }
 
     return () => {
       if (visible) {
-        console.log('remove callback from body | visible: %s', visible);
         document.removeEventListener('click', handleClickOutside);
       }
     };

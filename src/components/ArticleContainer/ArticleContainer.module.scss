@@ -4,8 +4,6 @@
   display: flex;
   border-radius: 8px;
   height: fit-content;
-  //padding: 5% 3%;
-  //gap: 30px;
   @include small() {
     flex-direction: column;
   }

@@ -26,7 +26,6 @@ export const AllBooksPage = () => {
   });
 
   let filteredBook = books || [];
-
   if (searchText) {
     filteredBook = filteredBook.filter(
       (item) =>
@@ -35,8 +34,6 @@ export const AllBooksPage = () => {
     );
   }
   filteredBook = filteredBook.slice(0, quantityBook);
-
-  console.log(filteredBook);
 
   const handleSearchResults = (event) => {
     event.preventDefault();

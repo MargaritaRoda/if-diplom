@@ -22,7 +22,8 @@
     "start": "webpack serve --config config/webpack.dev.js",
     "build": "NODE_ENV=production webpack --config config/webpack.prod.js",
     "prepare": "husky install",
-    "lint": "prettier --write . && eslint src/**/*.js --fix"
+    "lint": "prettier --write . && eslint src/**/*.js --fix",
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": [
@@ -75,6 +76,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.5.3",
     "husky": "^8.0.3",
+    "jest": "^29.6.2",
     "lint-staged": "^13.2.1",
     "mini-css-extract-plugin": "^2.7.6",
     "prettier": "2.8.7",

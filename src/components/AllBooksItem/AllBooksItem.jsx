@@ -12,17 +12,7 @@ import { selectUserEmail } from '../../store/selectors/user.selector';
 import { selectAllOrderBooks } from '../../store/selectors/allOrders.selector';
 import { isBookTaken } from '../../lib/findingBook';
 
-export const AllBooksItem = ({
-  alt,
-  name,
-  author,
-  imageUrl,
-  ratio,
-  id,
-  released,
-  description,
-  length,
-}) => {
+export const AllBooksItem = ({ alt, name, author, imageUrl, ratio, id }) => {
   const allOrdersList = useSelector(selectAllOrderBooks);
 
   const starRatio = makeRatio(ratio);
@@ -49,11 +39,7 @@ export const AllBooksItem = ({
 
   return (
     <div className={styles.AllBooksItem}>
-      <NavLink
-        to={`/books/${id}`}
-        // state={{ alt, name, author, imageUrl, released, description, length }}
-        className={styles.AllBooksItemImg}
-      >
+      <NavLink to={`/books/${id}`} className={styles.AllBooksItemImg}>
         <img src={imageUrl} alt={alt} className={styles.AllBooksItemImg} />
       </NavLink>
       <Button

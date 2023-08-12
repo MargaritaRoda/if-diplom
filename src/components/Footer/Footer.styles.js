@@ -8,12 +8,7 @@ export const useStyles = createUseStyles(
         color: 'var(--black)',
         maxHeight: 200,
         width: '100%',
-        // position: 'absolute',
-        // top: '82%',
       },
-      // footerContainer: {
-      //   Height: '100hv',
-      // },
       footerLogoIcon: {
         display: 'block',
         width: '100%',
@@ -24,14 +19,6 @@ export const useStyles = createUseStyles(
         display: 'flex',
         gap: 16,
       },
-      // footerLogoMobile: {
-      //   // display: 'none',
-      //   '@media (max-width: 360px)': {
-      //     display: 'block',
-      //     maxWidth: 26,
-      //     margin: '0 auto 40px',
-      //   },
-      // },
       footerItems: {
         display: 'flex',
         paddingTop: 40,
@@ -58,18 +45,6 @@ export const useStyles = createUseStyles(
         listStyle: 'none',
         padding: 0,
       },
-      // footerCopyright: {
-      //   marginTop: 64,
-      //   fontSize: 14,
-      //   '@media (max-width: 600px)': {
-      //     textAlign: 'center',
-      //   },
-      //   '@media (max-width: 360px)': {
-      //     fontSize: 12,
-      //     margin: '0 auto',
-      //     textAlign: 'center',
-      //   },
-      // },
       footerLinksItem: {
         paddingBottom: 10,
         '@media (max-width: 360px)': {

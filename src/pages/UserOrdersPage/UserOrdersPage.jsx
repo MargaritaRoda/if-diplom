@@ -22,8 +22,6 @@ export const UserOrdersPage = () => {
     userEmail,
   );
 
-  console.log('pending', pending);
-  console.log('available', available);
   return (
     <PageLayout>
       <div className={styles.mainUserPage}>

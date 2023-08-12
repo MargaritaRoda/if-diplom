@@ -9,14 +9,6 @@ const getUserOrders = (allOrders, userEmail) => {
   }, []);
 };
 
-const arr = [
-  { id: '1', email: '2222' },
-  { id: '2', email: '2222' },
-  { id: '3', email: '3333' },
-];
-const user1 = '3333';
-const user2 = '1111';
-
 // на основании обьекта userOrder (user текущей сессии) и общего массива обьектов  allOrders,
 // определяем в каком статусе находится конкретная книга, выбранная user текущей сессии
 // статус true - значит книга находится у user текущей сессии
@@ -41,12 +33,10 @@ const isOrderInProgress = (allOrders, order) => {
 // массив orderUser, которые сейчас у user
 // массив orderUser, которые у других пользователей, но хочет user
 
-const getUserAvailablePendingOrdersLists = (allOrders, userId) => {
-  // const listOfOrderedBooks = [[], []];
+export const getUserAvailablePendingOrdersLists = (allOrders, userId) => {
   const availableBooksList = [];
   const pendingBooksList = [];
   const userAllOrders = getUserOrders(allOrders, userId);
-  console.log('userAllOrders:', userAllOrders);
   for (let order of userAllOrders) {
     if (isOrderInProgress(allOrders, order)) {
       availableBooksList.push(order);
@@ -54,14 +44,12 @@ const getUserAvailablePendingOrdersLists = (allOrders, userId) => {
       pendingBooksList.push(order);
     }
   }
-  // return listOfOrderedBooks;
   return [availableBooksList, pendingBooksList];
 };
 
-// На oсновании массивова ордеров, которые выбрал User, из общего массива доступных книг
-// создаем массивы книг ждя рендеринга
+// На oсновании массива ордеров, которые выбрал User, из общего массива доступных книг
+// создаем массивы книг для рендеринга
 const convertOrdersIntoBooks = (allBooksArray, userOrders) => {
-  console.log('convertOrdersIntoBooks', allBooksArray, userOrders);
   const listOfOrderedBooks = [];
   for (let order of userOrders) {
     let foundBook = allBooksArray.find((book) => {
@@ -71,7 +59,7 @@ const convertOrdersIntoBooks = (allBooksArray, userOrders) => {
       listOfOrderedBooks.push(foundBook);
     }
   }
-  console.log({ listOfOrderedBooks });
+
   return listOfOrderedBooks;
 };
 
@@ -83,17 +71,10 @@ export const getUserAvailablePendingBooks = (
   allOrdersArr,
   userId,
 ) => {
-  console.log(
-    'getUserAvailablePendingBooks',
-    allBooksArr,
-    allOrdersArr,
-    userId,
-  );
   const [availableOrder, pendingOrders] = getUserAvailablePendingOrdersLists(
     allOrdersArr,
     userId,
   );
-  console.log({ availableOrder, pendingOrders });
   return [
     convertOrdersIntoBooks(allBooksArr, availableOrder),
     convertOrdersIntoBooks(allBooksArr, pendingOrders),

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './UserForm.module.scss';
 import { Icon } from '../Icon';
 import { useNavigate } from 'react-router-dom';

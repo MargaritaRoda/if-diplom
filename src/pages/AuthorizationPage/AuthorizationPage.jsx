@@ -12,7 +12,6 @@ import { login } from '../../store/slicers/user.slicer';
 export const AuthorizationPage = () => {
   const dispatch = useDispatch();
   const allUsersList = useSelector(selectAllUsers);
-  console.log('allUsersList', allUsersList);
 
   const navigate = useNavigate();
 
@@ -21,8 +20,6 @@ export const AuthorizationPage = () => {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     const { username, password } = data;
-
-    console.log('result', findingUser(allUsersList, { username, password }));
 
     const user = findingUser(allUsersList, {
       username,

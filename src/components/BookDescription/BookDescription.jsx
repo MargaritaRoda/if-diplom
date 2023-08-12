@@ -15,23 +15,18 @@ export const BookDescription = ({
   author,
   src,
   ratio,
-  textBtn,
   id,
   released,
   description,
   length,
-  ...props
 }) => {
-  console.log('props: ', props);
-
   const [showShortText, setShowShortText] = useState(true);
   const dispatch = useDispatch();
   const userEmail = useSelector(selectUserEmail);
+
   const allOrdersList = useSelector(selectAllOrderBooks);
 
   const starRatio = makeRatio(ratio);
-
-  console.log('id: ', id);
 
   const isTakenByCurrentUser = Boolean(
     allOrdersList.find(
@@ -39,15 +34,12 @@ export const BookDescription = ({
     ),
   );
 
-  console.log('isTakenByCurrentUser:', isTakenByCurrentUser);
-
   const handleShowText = () => {
     setShowShortText((currentState) => !currentState);
   };
 
   const handleOrderBook = (event) => {
     event.preventDefault();
-    // setReturnBook(!returnBook);
     dispatch(setOrder({ bookId: id, email: userEmail }));
   };
 
@@ -95,7 +87,6 @@ export const BookDescription = ({
           onClick={handleShowText}
         />
       )}
-      {/*</div>*/}
     </div>
   );
 };
