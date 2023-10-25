@@ -19,6 +19,7 @@ export const Header = ({ onClick, onSearchTextChange }) => {
   }, []);
 
   const isUserAuth = useSelector(isUserAuthorized);
+  // console.log('authorize', isUserAuth);
 
   const handleOpenDropDown = () => {
     setIsVisible(!isVisible);
